@@ -1,19 +1,18 @@
-import { Dashboard } from "./components/Dashboard";
 import { BrowserRouter as Router } from "react-router-dom";
-import { AppProvider } from './context/AppContext.tsx';
-import AuthProvider from './context/AuthContext.tsx';
+import { AppProvider } from './context/AppContext';
+import AppRoutes from "./router/AppRoutes";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./components/ErrorFallback";
 
 function App() {
   return (
-    <>
-      <AuthProvider>
-        <AppProvider>
-          <Router>
-            <Dashboard />
-          </Router>
-        </AppProvider>
-      </AuthProvider>
-    </>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <AppProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </AppProvider>
+    </ErrorBoundary>
   )
 }
 

@@ -1,8 +1,10 @@
+import { useAppContext } from "../../context/AppContext";
 
 const Home = () => {
+  const { loginData } = useAppContext();
   return (
     <div>
-      Hi Home adfjadslkf jadjf jadkfj ladskjf lkajdsflkjasdl;fj aldsjfkjadsfjasdkfj akljdf 
+      Hi {loginData?.name } from Home 
     </div>
   )
 }

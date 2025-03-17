@@ -1,16 +1,22 @@
-import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 // @ts-ignore
 // const Button = React.lazy(() => import('webstudio/Button'));
-import { AuthContext } from '../../context/AuthContext';
+
+import { useErrorBoundary } from 'react-error-boundary';
+import { useAppContext } from "../../context/AppContext";
 
 export const Login = () => {
-    const { setLoginData } = useContext(AuthContext)
+    const { setLoginData } = useAppContext();
     const navigate = useNavigate();
+    const { showBoundary } = useErrorBoundary();
+
     const onClickHandler = () => {
-        setLoginData({ name: 'John Doe' })
-        console.log('Button clicked from Host app')
-        navigate('/home')
+        try {
+            setLoginData({ name: 'John Doe' })
+            navigate('/home')
+        } catch (error) {
+            showBoundary(error)
+        }
     }
     return (
         <>

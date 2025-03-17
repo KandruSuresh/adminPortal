@@ -1,8 +1,10 @@
+import { useAppContext } from "../../context/AppContext";
 
 const Blogs = () => {
+  const { loginData } = useAppContext();
   return (
     <div className='flex'>
-      Blogs
+      Hi {loginData?.name} from Blogs
     </div>
   )
 }
