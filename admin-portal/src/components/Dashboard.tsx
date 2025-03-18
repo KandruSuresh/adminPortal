@@ -5,12 +5,11 @@ import Sidebar from "./Sidebar"
 import OutletContainer from "../router/OutletContainer"
 
 const Dashboard = () => {
-  const { sidebarOpen, setSidebarOpen, loginData } = useAppContext();
-  console.log('dashboard----------------', loginData);
+  const { sidebarOpen, setSidebarOpen } = useAppContext();
   return (
     <div className="screens-container">
-      <Sidebar loginData={loginData} sidebarOpen={sidebarOpen}/>
-      <div className={`${!sidebarOpen ? " " : " ml-64 "} w-full screens-section-container`}>
+      <Sidebar sidebarOpen={sidebarOpen}/>
+      <div className={`${!sidebarOpen ? " " : " ml-64 "} screens-section-container`}>
         <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <OutletContainer/>
       </div>
