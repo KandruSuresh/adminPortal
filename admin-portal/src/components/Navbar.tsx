@@ -10,7 +10,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: any) => {
     const path = window.location.pathname
     switch (path) {
       case '/home':
-        return ''
+        return 'Home'
       case '/blogs':
         return 'Blogs'
       case '/reports':
