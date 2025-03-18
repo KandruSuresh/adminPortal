@@ -4,7 +4,7 @@ const Home = () => {
   const { loginData } = useAppContext();
   return (
     <div>
-      Hi {loginData?.name } from Home 
+      Hi {loginData?.name } from Home afadsjkfkdsjf;lkjads;l jadkjf ;jadsfk suresh {loginData?.name }
     </div>
   )
 }

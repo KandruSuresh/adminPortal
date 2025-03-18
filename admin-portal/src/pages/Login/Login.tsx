@@ -12,8 +12,8 @@ export const Login = () => {
 
     const onClickHandler = () => {
         try {
-            setLoginData({ name: 'John Doe' })
-            navigate('/home')
+            setLoginData({ name: 'John Doe1' })
+            navigate('/blogs')
         } catch (error) {
             showBoundary(error)
         }

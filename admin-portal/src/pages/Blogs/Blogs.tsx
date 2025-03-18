@@ -4,7 +4,7 @@ const Blogs = () => {
   const { loginData } = useAppContext();
   return (
     <div className='flex'>
-      Hi {loginData?.name} from Blogs
+      Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii {loginData?.name} from Blogs
     </div>
   )
 }

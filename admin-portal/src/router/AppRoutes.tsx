@@ -4,6 +4,8 @@ import { Login } from "../pages/Login/Login";
 import { lazy, Suspense } from "react";
 import Error from "../pages/Error";
 import { useAppContext } from "../context/AppContext";
+// import ProtectedRoute from "../components/ProtectedRoute";
+import BaseLayout from "../components/BaseLayout";
 const Dashboard = lazy(() => import('../components/Dashboard'));
 const Home = lazy(() => import('../pages/Home/Home'));
 const Reports = lazy(() => import('../pages/Reports/Reports'));
@@ -51,7 +53,7 @@ const routes = [
         isLazy: true
     },
     {
-        path: `/blogs/*`,
+        path: `/blogs`,
         element: <Blogs />,
         isProtected: true,
         isLazy: true
@@ -64,21 +66,33 @@ const routes = [
     }
 ];
 
-const ProtectedRoute = ({ user, children }: any) => {
+/* const ProtectedRoute = ({ user, children }: any) => {
     if (!user) {
         window.location.href = '/login';
     }
     return children;
-};
+}; */
 
 const AppRoutes = () => {
     const { loginData } = useAppContext();
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-                {routes.map((route, index) => {
-                    return route.isProtected ? (
-                        <Route
+                <Route path="/" element={<BaseLayout />}>
+                    <Route path="home" element={<Home />} />
+                    <Route path="blogs" element={<Blogs />} />
+                    <Route path="reports" element={<Reports />} />
+                    <Route path="settings" element={<Settings />} />
+                    <Route path="inbox" element={<Inbox />} />
+                </Route>
+                <Route path="/login" element={<Login />} />
+            </Routes>
+        </Suspense>
+    );
+}
+export default AppRoutes;
+/*
+<Route
                             key={index}
                             path="/"
                             element={<Dashboard />}>
@@ -89,18 +103,4 @@ const AppRoutes = () => {
                                 }>{route.element}</ProtectedRoute> : route.element}
                             />
                         </Route>
-                    ) : (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={route.isProtected ? <ProtectedRoute user={
-                                loginData
-                            }>{route.element}</ProtectedRoute> : route.element}
-                        />
-                    );
-                })}
-            </Routes>
-        </Suspense>
-    );
-}
-export default AppRoutes;
+*/

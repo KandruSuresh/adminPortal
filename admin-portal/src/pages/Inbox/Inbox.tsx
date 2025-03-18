@@ -1,11 +1,14 @@
 
+import { useAppContext } from '../../context/AppContext';
 
 const Inbox = () => {
+  const { loginData } = useAppContext();
+
   return (
     <div className='flex'>
-      Inbox
+       Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii {loginData?.name} from Inbox
     </div>
-  )
-}
+  );
+};
 
-export default Inbox
+export default Inbox;
