@@ -1,10 +1,13 @@
 import { FaBars, FaSignOutAlt } from 'react-icons/fa'
 import { useAppContext } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../redux/reducers/loginSlice';
+import { useDispatch } from 'react-redux';
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }: any) => {
   const { setLoginData } = useAppContext();
   const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
 
   const getNavbarName = () => {
     const path = window.location.pathname
@@ -25,7 +28,8 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: any) => {
   }
 
   const logoutHandler = () => {
-    setLoginData({ name: 'John Doe' });
+    dispatch(logoutUser(''));
+    setLoginData({ name: '' });
     navigate('/login')
   };
 
