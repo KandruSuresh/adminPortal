@@ -1,22 +1,27 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 interface Partner {
     id: number;
     name: string;
-    
+
 }
 
-const initialState: { partnersList: Partner[] } = {
+const initialState: { partnersList: Partner[]; partnerSaved: Record<string, any> } = {
     // isLoading: false,
-    partnersList: []
+    partnersList: [],
+    partnerSaved: {}
 };
 
-export const fetchPartnerData = createAsyncThunk(
-    'managePartner/fetchPartner',
-    async () => {
-        const response = await axios.get('https://manage-partner-default-rtdb.firebaseio.com/partner.json');
-        const data = await response.data
-        return data
+export const fetchPartnerData = createAsyncThunk('managePartner/fetchPartner', async () => {
+    const response = await axios.get('https://manage-partner-default-rtdb.firebaseio.com/partner.json');
+    return response.data
+}
+)
+
+export const savePartnerData = createAsyncThunk('managePartner/savePartner', async (payload) => {
+        const response = await axios.post('https://manage-partner-default-rtdb.firebaseio.com/partner.json', payload);
+        return response.data
     }
 )
 
@@ -25,7 +30,7 @@ const managePartnerSlice = createSlice({
     initialState,
     reducers: {
         fetchPartner: (state, action) => {
-            state.partnersList.push(action.payload);
+            // state.partnersList.push(action.payload);
         },
         addPartner: (state, action) => {
             const partner = { id: Date.now(), name: action.payload.name }
@@ -46,6 +51,9 @@ const managePartnerSlice = createSlice({
         builder.addCase(fetchPartnerData.rejected, (state, action) => {
             // state.isLoading = false
             // state.error = action.error.message
+        })
+        builder.addCase(savePartnerData.fulfilled, (state, action) => {
+            state.partnerSaved = action.payload
         })
     }
 })
